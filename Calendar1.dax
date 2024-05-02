@@ -1,0 +1,4 @@
+CALENDAR(
+    DATE(YEAR(MIN('FactTable'[Transaction_Date])),1,1),
+    DATE(YEAR(MAX('FactTable'[Transaction_Date])),12,31)
+)
