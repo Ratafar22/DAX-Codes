@@ -1,0 +1,20 @@
+DimDate = 
+VAR _MinYear = YEAR(MIN('Sales by Store'[transaction_date]))
+VAR _MaxYear = YEAR(MAX('Sales by Store'[transaction_date]))
+RETURN
+ADDCOLUMNS(
+    FILTER(
+        CALENDARAUTO(),
+        YEAR([Date]) >= _MinYear &&
+        YEAR([Date]) <= _MaxYear
+    ),
+    "Year", YEAR([Date]),
+    "Quarter", QUARTER([Date]),
+    "Quarter No", "Q" & FORMAT([Date],"q"),
+    "Month", FORMAT([Date], "mmm"),
+    "MonthNo", MONTH([Date]),
+    "Week", WEEKNUM([Date]),
+    "Day", FORMAT([Date], "ddd"),
+    "DayNo", DAY([Date]),
+    "Weekend/Weekday", IF(WEEKDAY([Date],2) IN {6,7}, "Weekend", "Weekday")
+)
